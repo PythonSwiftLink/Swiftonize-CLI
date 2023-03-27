@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8CD51F3F29D1B84B00201F6A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD51F3E29D1B84B00201F6A /* main.swift */; };
+		8CD51F3F29D1B84B00201F6A /* cli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD51F3E29D1B84B00201F6A /* cli.swift */; };
+		8CD51F4729D1B8C600201F6A /* Swiftonize in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4629D1B8C600201F6A /* Swiftonize */; };
+		8CD51F4A29D1B92D00201F6A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4929D1B92D00201F6A /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +26,10 @@
 
 /* Begin PBXFileReference section */
 		8CD51F3B29D1B84B00201F6A /* SwiftonizeCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftonizeCLI; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CD51F3E29D1B84B00201F6A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8CD51F3E29D1B84B00201F6A /* cli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cli.swift; sourceTree = "<group>"; };
+		8CD51F4C29D1BA6200201F6A /* Swiftonize */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Swiftonize; path = ../../Swiftonize; sourceTree = "<group>"; };
+		8CD51F4D29D1BBAA00201F6A /* PythonSwiftCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PythonSwiftCore; path = ../../PythonSwiftCore; sourceTree = "<group>"; };
+		8CD51F4E29D1BCA200201F6A /* PyAstParser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PyAstParser; path = ../../PyAstParser; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CD51F4A29D1B92D00201F6A /* ArgumentParser in Frameworks */,
+				8CD51F4729D1B8C600201F6A /* Swiftonize in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +48,7 @@
 		8CD51F3229D1B84B00201F6A = {
 			isa = PBXGroup;
 			children = (
+				8CD51F4B29D1BA6200201F6A /* Packages */,
 				8CD51F3D29D1B84B00201F6A /* SwiftonizeCLI */,
 				8CD51F3C29D1B84B00201F6A /* Products */,
 			);
@@ -57,9 +65,19 @@
 		8CD51F3D29D1B84B00201F6A /* SwiftonizeCLI */ = {
 			isa = PBXGroup;
 			children = (
-				8CD51F3E29D1B84B00201F6A /* main.swift */,
+				8CD51F3E29D1B84B00201F6A /* cli.swift */,
 			);
 			path = SwiftonizeCLI;
+			sourceTree = "<group>";
+		};
+		8CD51F4B29D1BA6200201F6A /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				8CD51F4C29D1BA6200201F6A /* Swiftonize */,
+				8CD51F4D29D1BBAA00201F6A /* PythonSwiftCore */,
+				8CD51F4E29D1BCA200201F6A /* PyAstParser */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +96,10 @@
 			dependencies = (
 			);
 			name = SwiftonizeCLI;
+			packageProductDependencies = (
+				8CD51F4629D1B8C600201F6A /* Swiftonize */,
+				8CD51F4929D1B92D00201F6A /* ArgumentParser */,
+			);
 			productName = SwiftonizeCLI;
 			productReference = 8CD51F3B29D1B84B00201F6A /* SwiftonizeCLI */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +128,10 @@
 				Base,
 			);
 			mainGroup = 8CD51F3229D1B84B00201F6A;
+			packageReferences = (
+				8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */,
+				8CD51F4829D1B92D00201F6A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = 8CD51F3C29D1B84B00201F6A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CD51F3F29D1B84B00201F6A /* main.swift in Sources */,
+				8CD51F3F29D1B84B00201F6A /* cli.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +306,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PythonSwiftLink/Swiftonize";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8CD51F4829D1B92D00201F6A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8CD51F4629D1B8C600201F6A /* Swiftonize */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */;
+			productName = Swiftonize;
+		};
+		8CD51F4929D1B92D00201F6A /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD51F4829D1B92D00201F6A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8CD51F3329D1B84B00201F6A /* Project object */;
 }
