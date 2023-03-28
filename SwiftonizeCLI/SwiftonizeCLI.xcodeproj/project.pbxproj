@@ -10,6 +10,7 @@
 		8CD51F3F29D1B84B00201F6A /* cli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD51F3E29D1B84B00201F6A /* cli.swift */; };
 		8CD51F4729D1B8C600201F6A /* Swiftonize in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4629D1B8C600201F6A /* Swiftonize */; };
 		8CD51F4A29D1B92D00201F6A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4929D1B92D00201F6A /* ArgumentParser */; };
+		8CD51F5029D1D62600201F6A /* PythonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD51F4F29D1D62600201F6A /* PythonHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +31,7 @@
 		8CD51F4C29D1BA6200201F6A /* Swiftonize */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Swiftonize; path = ../../Swiftonize; sourceTree = "<group>"; };
 		8CD51F4D29D1BBAA00201F6A /* PythonSwiftCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PythonSwiftCore; path = ../../PythonSwiftCore; sourceTree = "<group>"; };
 		8CD51F4E29D1BCA200201F6A /* PyAstParser */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PyAstParser; path = ../../PyAstParser; sourceTree = "<group>"; };
+		8CD51F4F29D1D62600201F6A /* PythonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PythonHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		8CD51F3D29D1B84B00201F6A /* SwiftonizeCLI */ = {
 			isa = PBXGroup;
 			children = (
+				8CD51F4F29D1D62600201F6A /* PythonHandler.swift */,
 				8CD51F3E29D1B84B00201F6A /* cli.swift */,
 			);
 			path = SwiftonizeCLI;
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CD51F5029D1D62600201F6A /* PythonHandler.swift in Sources */,
 				8CD51F3F29D1B84B00201F6A /* cli.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -279,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

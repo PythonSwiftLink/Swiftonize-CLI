@@ -3,3 +3,4 @@ SwiftonizeCLI/.DS_Store
 SwiftonizeCLI/SwiftonizeCLI.xcodeproj/xcuserdata/musicmaker.xcuserdatad/xcschemes/xcschememanagement.plist
 *.xcuserstate
 *.resolved
+.DS_Store
