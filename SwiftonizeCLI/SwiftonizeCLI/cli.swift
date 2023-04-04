@@ -71,7 +71,7 @@ struct SwiftonizeCLI: AsyncParsableCommand {
                 
                 guard file.isFile, file.extension == "py" else { continue }
                 print(file)
-                let dst = destination + "\(source.lastComponentWithoutExtension).swift"
+                let dst = destination + "\(file.lastComponentWithoutExtension).swift"
                 try await build_wrapper(src: file, dst: dst, site: site)
                 
             }
