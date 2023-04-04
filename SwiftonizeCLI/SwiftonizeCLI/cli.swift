@@ -2,8 +2,9 @@
 
 import Foundation
 import ArgumentParser
-import Swiftonize
-
+//import Swiftonize
+import PythonSwiftCore
+import PathKit
 
 func DEBUG_PRINT(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 #if DEBUG
@@ -35,7 +36,7 @@ struct SwiftonizeCLI: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "SwiftonizeCLI",
         version: "0.0.1",
-        subcommands: [Build.self].sorted(by: {$0._commandName < $1._commandName})
+        subcommands: [Build.self, BuildAll.self].sorted(by: {$0._commandName < $1._commandName})
     )
     
     
@@ -43,23 +44,41 @@ struct SwiftonizeCLI: AsyncParsableCommand {
     struct Build: AsyncParsableCommand {
         
         //@Argument() var project: String
-        @Argument() var source: String
-        @Argument() var destination: String
+        @Argument(transform: { p -> Path in .init(p) }) var source
+        @Argument(transform: { p -> Path in .init(p) }) var destination
+        @Option(transform: { p -> Path? in .init(p) }) var site
         
         func run() async throws {
-            print(APP_FOLDER)
-            let src = URL(fileURLWithPath: source)
+            
+            let dst = destination + "\(source.lastComponentWithoutExtension).swift"
 
-            let filename = src.lastPathComponent.replacingOccurrences(of: ".py", with: "")
-
-            let dst = URL(fileURLWithPath: destination).appendingPathComponent("\(filename).swift")
-
-            let code = try String(contentsOf: src)
-
-            let module = await WrapModule(fromAst: filename, string: code, swiftui: false)
-            try module.pySwiftCode.write(to: dst, atomically: true, encoding: .utf8)
+            try await build_wrapper(src: source, dst: dst, site: site)
+            
         }
         
     }
+    
+    struct BuildAll: AsyncParsableCommand {
+        
+        //@Argument() var project: String
+        @Argument(transform: { p -> Path in .init(p) }) var source
+        @Argument(transform: { p -> Path in .init(p) }) var destination
+        @Option(transform: { p -> Path? in .init(p) }) var site
+        
+        func run() async throws {
+            print(source)
+            for file in source {
+                
+                guard file.isFile, file.extension == "py" else { continue }
+                print(file)
+                let dst = destination + "\(source.lastComponentWithoutExtension).swift"
+                try await build_wrapper(src: file, dst: dst, site: site)
+                
+            }
+            
+        }
+        
+    }
+    
     
 }
