@@ -24,7 +24,7 @@ func build_wrapper(src: Path, dst: Path, site: Path?) async throws {
     
     if let site = site {
         let test_parse = pythonImport(from: "pure_py_parser", import_name: "testParse").pyPointer
-        try (site + filename).write(test_parse(code), encoding: .utf8)
+        try (site + "\(filename).swift").write(test_parse(code), encoding: .utf8)
         
     }
 }
