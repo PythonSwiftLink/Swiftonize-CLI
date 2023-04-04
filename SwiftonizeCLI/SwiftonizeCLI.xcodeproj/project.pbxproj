@@ -29,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		8C114E2329DB9A8D0068AB04 /* Build.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
-		8C114E2829DBA3B50068AB04 /* PythonSwiftCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PythonSwiftCore; path = ../../PythonSwiftCore; sourceTree = "<group>"; };
 		8CD51F3B29D1B84B00201F6A /* SwiftonizeCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftonizeCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD51F3E29D1B84B00201F6A /* cli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cli.swift; sourceTree = "<group>"; };
 		8CD51F4F29D1D62600201F6A /* PythonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PythonHandler.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		8CD51F4B29D1BA6200201F6A /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				8C114E2829DBA3B50068AB04 /* PythonSwiftCore */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
