@@ -48,12 +48,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C89D97029E443430098224F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8CD51F3229D1B84B00201F6A = {
 			isa = PBXGroup;
 			children = (
 				8CD51F4B29D1BA6200201F6A /* Packages */,
 				8CD51F3D29D1B84B00201F6A /* SwiftonizeCLI */,
 				8CD51F3C29D1B84B00201F6A /* Products */,
+				8C89D97029E443430098224F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +143,7 @@
 				8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */,
 				8CD51F4829D1B92D00201F6A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				8C114E2529DB9EC20068AB04 /* XCRemoteSwiftPackageReference "PathKit" */,
+				8C89D97329E573840098224F /* XCRemoteSwiftPackageReference "PythonSwiftCore" */,
 			);
 			productRefGroup = 8CD51F3C29D1B84B00201F6A /* Products */;
 			projectDirPath = "";
@@ -322,6 +331,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		8C89D97329E573840098224F /* XCRemoteSwiftPackageReference "PythonSwiftCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PythonSwiftLink/PythonSwiftCore";
+			requirement = {
+				kind = exactVersion;
+				version = 0.2.0;
 			};
 		};
 		8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */ = {

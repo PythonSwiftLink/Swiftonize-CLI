@@ -10,6 +10,18 @@ import ArgumentParser
 import Swiftonize
 import PythonSwiftCore
 import PathKit
+import PythonLib
+
+fileprivate extension PyPointer {
+    
+    func callAsFunction(_ string: String) throws -> String {
+        //PyObject_Vectorcall(self, args, arg_count, nil)
+        let _string = string.pyPointer
+        guard let rtn = PyObject_CallOneArg(self, _string) else { throw PythonError.call }
+        
+        return (try? .init(object: rtn)) ?? ""
+    }
+}
 
 func build_wrapper(src: Path, dst: Path, site: Path?) async throws {
     
@@ -23,8 +35,17 @@ func build_wrapper(src: Path, dst: Path, site: Path?) async throws {
     try dst.write(module.pySwiftCode)
     
     if let site = site {
-        let test_parse = pythonImport(from: "pure_py_parser", import_name: "testParse").pyPointer
-        try (site + "\(filename).py").write(test_parse(code), encoding: .utf8)
+        guard let test_parse: PyPointer = pythonImport(from: "pure_py_parser", import_name: "testParse") else { throw PythonError.attribute }
+        do {
+            try (site + "\(filename).py").write(test_parse(code), encoding: .utf8)
+        }
         
+        catch let err as PythonError {
+            print(err.localizedDescription)
+            err.triggerError("")
+        }
+        catch let other {
+            print(other.localizedDescription)
+        }
     }
 }
