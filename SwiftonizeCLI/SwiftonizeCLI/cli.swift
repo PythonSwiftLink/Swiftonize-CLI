@@ -67,12 +67,34 @@ struct SwiftonizeCLI: AsyncParsableCommand {
         
         func run() async throws {
             print(source)
-            for file in source {
+            
+            var src: Path
+            
+            switch source {
+            case let sym where source.isSymlink:
+                src = try sym.symlinkDestination()
+            case let dir where source.isDirectory:
+                src = dir
+            default: fatalError("\(source.string) is not a directory")
+            }
+            
+            let wrappers = try SourceFilter(root: src)
+            
+            for file in wrappers.sources {
                 
-                guard file.isFile, file.extension == "py" else { continue }
-                print(file)
-                let dst = destination + "\(file.lastComponentWithoutExtension).swift"
-                try await build_wrapper(src: file, dst: dst, site: site)
+                switch file {
+                case .pyi(let path):
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site)
+                case .py(let path):
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site)
+                case .both(_, let pyi):
+                    try await build_wrapper(src: pyi, dst: file.swiftFile(destination), site: site)
+                }
+                
+//                guard file.isFile, file.extension == "py" else { continue }
+//                print(file)
+//                let dst = destination + "\(file.lastComponentWithoutExtension).swift"
+//                try await build_wrapper(src: file, dst: dst, site: site)
                 
             }
             
