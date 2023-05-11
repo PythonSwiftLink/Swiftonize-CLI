@@ -2,9 +2,12 @@
 
 import Foundation
 import ArgumentParser
-//import Swiftonize
+import Swiftonize
 import PythonSwiftCore
 import PathKit
+import SwiftSyntax
+import SwiftSyntaxBuilder
+import SwiftSyntaxParser
 
 func DEBUG_PRINT(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 #if DEBUG
@@ -36,7 +39,7 @@ struct SwiftonizeCLI: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "SwiftonizeCLI",
         version: "0.0.1",
-        subcommands: [Build.self, BuildAll.self].sorted(by: {$0._commandName < $1._commandName})
+        subcommands: [Build.self, BuildAll.self, TestSyntax.self, Generics.self].sorted(by: {$0._commandName < $1._commandName})
     )
     
     
@@ -54,6 +57,48 @@ struct SwiftonizeCLI: AsyncParsableCommand {
 
             try await build_wrapper(src: source, dst: dst, site: site)
             
+        }
+        
+    }
+    
+    struct Generics: AsyncParsableCommand {
+        
+        func run() async throws {
+            //            let tester = PyCallbacks()
+            //            try tester.test0(string: "")
+            //tester.test1(string: "guard nargs > 1, let _args_ = _args_, let s = s else { throw PythonError.call }")
+            
+            //            tester.test2(string: """
+            //            .init(withArgs: "hmmmmmm") { s, _args_, nargs in
+            //                return nil
+            //            }
+            //            """)
+            
+                let decl = GenerateCallables().code
+                let code = decl.formatted().description
+                    .replacingOccurrences(of: " < A", with: "<A")
+                    .replacingOccurrences(of: " < R:", with: "<R:")
+                    .replacingOccurrences(of: "on < ", with: "on<")
+                    .replacingOccurrences(of: "Python > ", with: "Python>")
+                    .replacingOccurrences(of: " > (", with: ">(")
+                print(code)
+            try Path("/Users/musicmaker/Documents/GitHub/PythonSwiftCore/Sources/PythonSwiftCore/PyPointer+PyCall.swift").write(code)
+        }
+        
+    }
+    
+    struct TestSyntax: AsyncParsableCommand {
+        
+        func run() async throws {
+//            let tester = PyCallbacks()
+//            try tester.test0(string: "")
+            //tester.test1(string: "guard nargs > 1, let _args_ = _args_, let s = s else { throw PythonError.call }")
+            
+//            tester.test2(string: """
+//            .init(withArgs: "hmmmmmm") { s, _args_, nargs in
+//                return nil
+//            }
+//            """)
         }
         
     }

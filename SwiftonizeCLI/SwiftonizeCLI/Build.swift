@@ -32,7 +32,12 @@ func build_wrapper(src: Path, dst: Path, site: Path?) async throws {
     
     let module = await WrapModule(fromAst: filename, string: code, swiftui: false)
 //    /try module.pySwiftCode.write(to: dst, atomically: true, encoding: .utf8)
-    try dst.write(module.pySwiftCode)
+    let module_code = module.code.formatted().description
+        .replacingOccurrences(of: "Unmanaged < ", with: "Unmanaged<")
+        .replacingOccurrences(of: " > .fromOpaque", with: ">.fromOpaque")
+    
+//    return
+    try dst.write(module_code)
     
     if let site = site {
         guard let test_parse: PyPointer = pythonImport(from: "pure_py_parser", import_name: "testParse") else { throw PythonError.attribute }

@@ -10,6 +10,11 @@
 		8C114E2429DB9A8D0068AB04 /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C114E2329DB9A8D0068AB04 /* Build.swift */; };
 		8C114E2729DB9EC20068AB04 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C114E2629DB9EC20068AB04 /* PathKit */; };
 		8C7C255B29E9874900447236 /* SourceFilesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C255A29E9874900447236 /* SourceFilesFilter.swift */; };
+		8C8E3D0829F71C1E008552E8 /* SwiftOperators in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8E3D0729F71C1E008552E8 /* SwiftOperators */; };
+		8C8E3D0A29F71C1E008552E8 /* SwiftParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8E3D0929F71C1E008552E8 /* SwiftParser */; };
+		8C8E3D0C29F71C1E008552E8 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8E3D0B29F71C1E008552E8 /* SwiftSyntax */; };
+		8C8E3D0E29F71C1E008552E8 /* SwiftSyntaxBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8E3D0D29F71C1E008552E8 /* SwiftSyntaxBuilder */; };
+		8C8E3D1029F71C1E008552E8 /* SwiftSyntaxParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8E3D0F29F71C1E008552E8 /* SwiftSyntaxParser */; };
 		8CD51F3F29D1B84B00201F6A /* cli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD51F3E29D1B84B00201F6A /* cli.swift */; };
 		8CD51F4729D1B8C600201F6A /* Swiftonize in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4629D1B8C600201F6A /* Swiftonize */; };
 		8CD51F4A29D1B92D00201F6A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD51F4929D1B92D00201F6A /* ArgumentParser */; };
@@ -42,7 +47,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C114E2729DB9EC20068AB04 /* PathKit in Frameworks */,
+				8C8E3D0C29F71C1E008552E8 /* SwiftSyntax in Frameworks */,
+				8C8E3D1029F71C1E008552E8 /* SwiftSyntaxParser in Frameworks */,
 				8CD51F4A29D1B92D00201F6A /* ArgumentParser in Frameworks */,
+				8C8E3D0A29F71C1E008552E8 /* SwiftParser in Frameworks */,
+				8C8E3D0E29F71C1E008552E8 /* SwiftSyntaxBuilder in Frameworks */,
+				8C8E3D0829F71C1E008552E8 /* SwiftOperators in Frameworks */,
 				8CD51F4729D1B8C600201F6A /* Swiftonize in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +123,11 @@
 				8CD51F4629D1B8C600201F6A /* Swiftonize */,
 				8CD51F4929D1B92D00201F6A /* ArgumentParser */,
 				8C114E2629DB9EC20068AB04 /* PathKit */,
+				8C8E3D0729F71C1E008552E8 /* SwiftOperators */,
+				8C8E3D0929F71C1E008552E8 /* SwiftParser */,
+				8C8E3D0B29F71C1E008552E8 /* SwiftSyntax */,
+				8C8E3D0D29F71C1E008552E8 /* SwiftSyntaxBuilder */,
+				8C8E3D0F29F71C1E008552E8 /* SwiftSyntaxParser */,
 			);
 			productName = SwiftonizeCLI;
 			productReference = 8CD51F3B29D1B84B00201F6A /* SwiftonizeCLI */;
@@ -147,6 +162,7 @@
 				8CD51F4829D1B92D00201F6A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				8C114E2529DB9EC20068AB04 /* XCRemoteSwiftPackageReference "PathKit" */,
 				8C89D97329E573840098224F /* XCRemoteSwiftPackageReference "PythonSwiftCore" */,
+				8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */,
 			);
 			productRefGroup = 8CD51F3C29D1B84B00201F6A /* Products */;
 			projectDirPath = "";
@@ -341,8 +357,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/PythonSwiftLink/PythonSwiftCore";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+		8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-syntax";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 508.0.0;
 			};
 		};
 		8CD51F4529D1B8C600201F6A /* XCRemoteSwiftPackageReference "Swiftonize" */ = {
@@ -368,6 +392,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C114E2529DB9EC20068AB04 /* XCRemoteSwiftPackageReference "PathKit" */;
 			productName = PathKit;
+		};
+		8C8E3D0729F71C1E008552E8 /* SwiftOperators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftOperators;
+		};
+		8C8E3D0929F71C1E008552E8 /* SwiftParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftParser;
+		};
+		8C8E3D0B29F71C1E008552E8 /* SwiftSyntax */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntax;
+		};
+		8C8E3D0D29F71C1E008552E8 /* SwiftSyntaxBuilder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntaxBuilder;
+		};
+		8C8E3D0F29F71C1E008552E8 /* SwiftSyntaxParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8E3D0629F71C1E008552E8 /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntaxParser;
 		};
 		8CD51F4629D1B8C600201F6A /* Swiftonize */ = {
 			isa = XCSwiftPackageProductDependency;
