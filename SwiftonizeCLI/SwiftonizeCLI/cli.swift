@@ -50,12 +50,14 @@ struct SwiftonizeCLI: AsyncParsableCommand {
         @Argument(transform: { p -> Path in .init(p) }) var source
         @Argument(transform: { p -> Path in .init(p) }) var destination
         @Option(transform: { p -> Path? in .init(p) }) var site
+        @Flag() var beeware: Bool = false
+        
         
         func run() async throws {
             
             let dst = destination + "\(source.lastComponentWithoutExtension).swift"
 
-            try await build_wrapper(src: source, dst: dst, site: site)
+            try await build_wrapper(src: source, dst: dst, site: site, beeware: beeware)
             
         }
         
@@ -109,6 +111,7 @@ struct SwiftonizeCLI: AsyncParsableCommand {
         @Argument(transform: { p -> Path in .init(p) }) var source
         @Argument(transform: { p -> Path in .init(p) }) var destination
         @Option(transform: { p -> Path? in .init(p) }) var site
+        @Flag() var beeware: Bool = false
         
         func run() async throws {
             print(source)
@@ -129,11 +132,11 @@ struct SwiftonizeCLI: AsyncParsableCommand {
                 
                 switch file {
                 case .pyi(let path):
-                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site)
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site, beeware: beeware)
                 case .py(let path):
-                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site)
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site, beeware: beeware)
                 case .both(_, let pyi):
-                    try await build_wrapper(src: pyi, dst: file.swiftFile(destination), site: site)
+                    try await build_wrapper(src: pyi, dst: file.swiftFile(destination), site: site, beeware: beeware)
                 }
                 
 //                guard file.isFile, file.extension == "py" else { continue }
@@ -147,5 +150,48 @@ struct SwiftonizeCLI: AsyncParsableCommand {
         
     }
     
-    
+    struct SwiftAutoWrap: AsyncParsableCommand {
+        
+        //@Argument() var project: String
+        @Argument(transform: { p -> Path in .init(p) }) var source
+        @Argument(transform: { p -> Path in .init(p) }) var destination
+        @Option(transform: { p -> Path? in .init(p) }) var site
+        @Flag() var beeware: Bool = false
+        
+        func run() async throws {
+            print(source)
+            
+            var src: Path
+            
+            switch source {
+            case let sym where source.isSymlink:
+                src = try sym.symlinkDestination()
+            case let dir where source.isDirectory:
+                src = dir
+            default: fatalError("\(source.string) is not a directory")
+            }
+            
+            let wrappers = try SourceFilter(root: src)
+            
+            for file in wrappers.sources {
+                
+                switch file {
+                case .pyi(let path):
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site, beeware: beeware)
+                case .py(let path):
+                    try await build_wrapper(src: path, dst: file.swiftFile(destination), site: site, beeware: beeware)
+                case .both(_, let pyi):
+                    try await build_wrapper(src: pyi, dst: file.swiftFile(destination), site: site, beeware: beeware)
+                }
+                
+                //                guard file.isFile, file.extension == "py" else { continue }
+                //                print(file)
+                //                let dst = destination + "\(file.lastComponentWithoutExtension).swift"
+                //                try await build_wrapper(src: file, dst: dst, site: site)
+                
+            }
+            
+        }
+        
+    }
 }

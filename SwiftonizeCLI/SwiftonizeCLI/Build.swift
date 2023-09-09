@@ -23,14 +23,14 @@ fileprivate extension PyPointer {
     }
 }
 
-func build_wrapper(src: Path, dst: Path, site: Path?) async throws {
+func build_wrapper(src: Path, dst: Path, site: Path?, beeware: Bool = false) async throws {
     
     //let filename = src.lastPathComponent.replacingOccurrences(of: ".py", with: "")
     let filename = src.lastComponentWithoutExtension
     //let code = try String(contentsOf: src)
     let code = try src.read(.utf8)
     
-    let module = await WrapModule(fromAst: filename, string: code, swiftui: false)
+    let module = await WrapModule(fromAst: filename, string: code, swiftui: beeware)
 //    /try module.pySwiftCode.write(to: dst, atomically: true, encoding: .utf8)
     let module_code = module.code.formatted().description
         .replacingOccurrences(of: "Unmanaged < ", with: "Unmanaged<")
